@@ -13,21 +13,15 @@ Os entregáveis são:
 ### TODO:
 
 - [ ] Gerador de scanner
-    - [ ] Transformar expressões regulares em um AFN
-    - Estratégia 1:
-        - [ ] Transformar cada AFN em um AFD. (Daniel)
-        - [ ] Minimização.
-        - [ ] Juntar tudo em um único AFN e transformar em um AFD novamente.
-    - Estratégia 2:
-        - [ ] Juntar tudo em um único AFN e transformar em um AFD.
-        - Minimização (x) ?
-    - [ ] Implementar algoritmo que leia o autômato e: 
-        - Estratégia 1: gere o código do scanner que imprime os tokens
-        - Estratégia 2: imprima os tokens
+    - [ ] Transformar expressões regulares em um AFN. (Valesca)
+    - [ ] Transformar cada AFN em um AFD. (Daniel)
+    - [ ] Minimização cada AFD. (Daniel)
+    - [ ] Juntar tudo em um único AFN e transformar em um AFD novamente. (Daniel)
+    - [ ] Implementar algoritmo que leia o autômato e imprima os tokens. (Valesca)
 - [ ] Parser top-down
-    - [ ] Transformar a BNF para LL: https://github.com/TangoEnSkai/mini-c-compiler-c/blob/master/mini_c.gr.
-    - [ ] Calcular First e Follow.
-    - [ ] Implementar o parser de acordo com o algoritmo dado.
+    - [ ] Transformar a BNF para LL: https://github.com/TangoEnSkai/mini-c-compiler-c/blob/master/mini_c.gr. (Valesca)
+    - [ ] Calcular First e Follow e montar a tabela. (Daniel)
+    - [ ] Implementar o parser de acordo com o algoritmo dado. (Valesca)
 
 
 Estrutura de dados: A definir
