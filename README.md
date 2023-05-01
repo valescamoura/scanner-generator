@@ -19,7 +19,7 @@ Os entregáveis são:
     - [ ] Juntar tudo em um único AFN e transformar em um AFD novamente. (Daniel)
     - [ ] Implementar algoritmo que leia o autômato e imprima os tokens. (Valesca)
 - [ ] Parser top-down
-    - [ ] Transformar a BNF para LL: https://github.com/TangoEnSkai/mini-c-compiler-c/blob/master/mini_c.gr. (Valesca)
+    - [x] Transformar a BNF para LL: https://github.com/TangoEnSkai/mini-c-compiler-c/blob/master/mini_c.gr. (Valesca)
     - [ ] Calcular First e Follow e montar a tabela. (Daniel)
     - [ ] Implementar o parser de acordo com o algoritmo dado. (Valesca)
 
