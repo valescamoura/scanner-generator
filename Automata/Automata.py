@@ -16,9 +16,6 @@ The final states are organized in a dictionary by the token they represent.
 final_states = {
     token: set()
 }
-
-To use this class correctly is important to define all states, alphabet letters and tokens before building the transition table and the final states table.
-TODO: Change the implementation so there is no 
 """
 
 class Automata:
