@@ -13,14 +13,13 @@ Os entregáveis são:
 ### TODO:
 
 - [ ] Gerador de scanner
-    - [ ] Transformar expressões regulares em um AFN. (Valesca)
+    - [ ] Transformar expressões regulares em um AFN. (Daniel)
     - [ ] Transformar cada AFN em um AFD. (Daniel)
-    - [ ] Minimização cada AFD. (Daniel)
-    - [ ] Juntar tudo em um único AFN e transformar em um AFD novamente. (Daniel)
+    - [ ] Minimização de cada AFD. (Daniel)
     - [ ] Implementar algoritmo que leia o autômato e imprima os tokens. (Valesca)
 - [ ] Parser top-down
     - [x] Transformar a BNF para LL: https://github.com/TangoEnSkai/mini-c-compiler-c/blob/master/mini_c.gr. (Valesca)
-    - [ ] Calcular First e Follow e montar a tabela. (Daniel)
+    - [ ] Calcular First e Follow e montar a tabela. (Valesca)
     - [ ] Implementar o parser de acordo com o algoritmo dado. (Valesca)
 
 
