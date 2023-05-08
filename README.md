@@ -14,7 +14,7 @@ Os entregáveis são:
 
 - [ ] Gerador de scanner
     - [ ] Transformar expressões regulares em um AFN. (Daniel)
-    - [ ] Transformar cada AFN em um AFD. (Daniel)
+    - [x] Transformar cada AFN em um AFD. (Daniel)
     - [ ] Minimização de cada AFD. (Daniel)
     - [ ] Implementar algoritmo que leia o autômato e imprima os tokens. (Valesca)
 - [ ] Parser top-down
