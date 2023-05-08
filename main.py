@@ -1,5 +1,6 @@
 from Classes.Automata import Automata
 from util.conversion import convert_to_dfa
+from util.minimization import * 
 
 
 if __name__ == '__main__':
@@ -20,4 +21,13 @@ if __name__ == '__main__':
     a.insert_transition('q3', 'a','q1')
     #a.insert_transition('q3', 'ε','q1')
 
-    print(convert_to_dfa(a).transition)
+    #print(convert_to_dfa(a).transition)
+
+    states = ['A', 'B', 'C', 'D', 'E', 'F']
+    final = ['C', 'D', 'E']
+
+    nerode_table = create_nerode_table(states)
+
+    nerode_table = simple_elimination(nerode_table, final)
+
+    print(nerode_table)
