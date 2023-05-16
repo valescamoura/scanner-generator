@@ -1,0 +1,28 @@
+	identifier	(	)	,	;	int	float	while	if	else	{	}	=	==	<	>	<=	>=	!=	+	-	*	/	number	for
+Function	avanca	avanca	avanca	avanca	avanca	8	9	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca
+ArgList	avanca	avanca	desempilha	3	avanca	6	6	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca
+ArgList'	avanca	avanca	5	4	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca
+Arg	avanca	avanca	desempilha	avanca	avanca	6	6	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca
+Declaration	desempilha	desempilha	avanca	avanca	desempilha	7	7	desempilha	desempilha	desempilha	desempilha	avanca	avanca	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha
+Type	desempilha	avanca	avanca	avanca	avanca	8	9	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca
+IdentList	10, 11	avanca	avanca	avanca	desempilha	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca
+Stmt	14	14	avanca	avanca	18	17	17	13	15	desempilha	16	avanca	avanca	14	14	14	14	14	14	14	14	14	14	14	12
+ForStmt	desempilha	desempilha	avanca	avanca	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	avanca	avanca	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	19
+OptExpr	20	20	21	avanca	21	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	20	20	20	20	20	20	20	20	20	20	20	avanca
+WhileStmt	desempilha	desempilha	avanca	avanca	desempilha	desempilha	desempilha	22	desempilha	desempilha	desempilha	avanca	avanca	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha
+IfStmt	desempilha	desempilha	avanca	avanca	desempilha	desempilha	desempilha	desempilha	23	desempilha	desempilha	avanca	avanca	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha
+ElsePart	25	25	avanca	avanca	25	25	25	25	25	24, 25	25	avanca	avanca	25	25	25	25	25	25	25	25	25	25	25	25
+CompoundStmt	desempilha	desempilha	avanca	avanca	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	26	avanca	avanca	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha	desempilha
+StmtList	27	27	avanca	avanca	27	27	27	27	27	avanca	27	28	avanca	27	27	27	27	27	27	27	27	27	27	27	27
+StmtList'	29	29	avanca	avanca	29	29	29	29	29	avanca	29	30	avanca	29	29	29	29	29	29	29	29	29	29	29	29
+Expr	31, 32	32	desempilha	avanca	desempilha	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	32	32	32	32	32	32	32	32	32	32	32	avanca
+Rvalue	34	34	desempilha	avanca	desempilha	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	33	33	33	33	33	33	34	34	34	34	34	avanca
+Rvalue'	avanca	avanca	36	avanca	36	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	35	35	35	35	35	35	avanca	avanca	avanca	avanca	avanca	avanca
+Compare	desempilha	desempilha	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	37	38	39	40	41	42	desempilha	desempilha	desempilha	desempilha	desempilha	avanca
+Mag	45	45	desempilha	avanca	desempilha	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	43, 45	44, 45	45	45	45	avanca
+Mag'	avanca	avanca	47	avanca	47	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	46	avanca	avanca	avanca	avanca	avanca
+Mag''	avanca	avanca	49	avanca	49	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	48	avanca	avanca	avanca	avanca
+Term	52	52	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	52	52	50	51	52	avanca
+Term'	54	54	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	54	54	53, 54	54	54	avanca
+Term''	56	56	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	56	56	56	55,56	56	avanca
+Factor	60	57	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	avanca	59	58	desempilha	desempilha	61	avanca

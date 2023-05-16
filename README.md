@@ -29,4 +29,4 @@ Dicas:
 - para cada tipo de token -> lista de separadores possiveis
 - listar limitacoes no relatorio de entrega
 - linha que o token está na saída do scanner
-
+- ε -> desempilha
