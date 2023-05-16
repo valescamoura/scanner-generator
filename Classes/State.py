@@ -11,10 +11,10 @@ class State:
 
         return State(formed_by)
 
-    def __init__(self, formed_by=set()) -> None:
+    def __init__(self, name, formed_by=set()) -> None:
 
         self.id = State.counter
-        
+        self.name = name
         self.formed_by = formed_by
 
         if self.formed_by == set():
@@ -27,4 +27,4 @@ class State:
         return str(__value) == self.__str__()
 
     def __str__(self) -> str:
-        return f'q{self.id}'
+        return f'{self.name}:{self.id}'

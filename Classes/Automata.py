@@ -13,11 +13,11 @@ That means:
     The automata is deterministic if the size of each subset is at maximum 1 and ε is not in the alphabet.
 """
 
-from State import State
+from Classes.State import State
 
 class Automata:
 
-    def __init__(self, states: list, alphabet: list, initial_state: str, final_states=[], token='') -> None:
+    def __init__(self, states: list, alphabet: list, initial_state: State, final_states=[], token='') -> None:
         
         self.states = states
         self.alphabet = alphabet
@@ -25,7 +25,7 @@ class Automata:
         self.final_states = []
 
         for state in final_states:
-            self.define_final_state(state)
+            self.set_final_state(state)
         self.set_initial_state(initial_state)
         self.build_transition_table()
 
@@ -36,25 +36,30 @@ class Automata:
         self.transition = dict()
 
         for state in self.states:
-            self.transition[state] = dict()
+
+            state_string = str(state)
+
+            self.transition[state_string] = dict()
 
             for symbol in self.alphabet:
-                self.transition[state][symbol] = []
+                self.transition[state_string][symbol] = []
 
     def set_initial_state(self, initial_state: str):
         
         if initial_state in self.states:
-            self.initial_state =  initial_state
+            self.initial_state = initial_state
         else:
             raise Exception(f'Cannot set {initial_state} as the initial state: State not found')
 
-    def insert_transition(self, initial_state: str, symbol : str, destination_state: str):
+    def insert_transition(self, initial_state: State, symbol : str, destination_state: State):
 
             try:
+                init_state_str = str(initial_state)
+                dest_state_str = str(destination_state)
                 if destination_state not in self.states:
                     raise Exception(f'Destination state {destination_state} not found')
-                if destination_state not in self.transition[initial_state][symbol]:
-                    self.transition[initial_state][symbol].append(destination_state)
+                if destination_state not in self.transition[init_state_str][symbol]:
+                    self.transition[init_state_str][symbol].append(dest_state_str)
                 else:
                     print(f'Transition ({initial_state},{symbol}) -> {destination_state} already in transition table')
             except:
@@ -62,7 +67,7 @@ class Automata:
         
 
     #Turn a state into a final state
-    def define_final_state(self, state: str):
+    def set_final_state(self, state: State):
 
         if state in self.states and state not in self.final_states:
                 self.final_states.append(state)
@@ -70,13 +75,15 @@ class Automata:
             print(f'State {state} not found or is already final')
 
     #insert a new state and update the transition table
-    def insert_state(self, state: str):
+    def insert_state(self, state: State):
         
+        state_str = str(state)
+
         if state not in self.states:
             self.states.append(state)
-            self.transition[state] = dict()
+            self.transition[state_str] = dict()
             for symbol in self.alphabet:
-                self.transition[state][symbol] = []
+                self.transition[state_str][symbol] = []
         else:
             print(f'State {state} already exists')
     
