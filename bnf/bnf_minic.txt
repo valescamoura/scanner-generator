@@ -1,0 +1,87 @@
+1) Function      ->  Type identifier ( ArgList ) CompoundStmt
+
+2) ArgList       ->  Arg
+3) ArgList       ->  , Arg ArgList'
+
+4) ArgList'       ->  , Arg ArgList'
+5) ArgList'       ->  ε    
+
+6) Arg           ->  Type identifier
+
+7) Declaration   ->  Type IdentList ;
+
+8) Type          ->  int
+9) Type          ->  float
+
+10) IdentList     ->  identifier , IdentList
+11) IdentList     ->  identifier
+
+12) Stmt          ->  ForStmt
+13) Stmt          ->  WhileStmt
+14) Stmt          ->  Expr ;
+15) Stmt          ->  IfStmt
+16) Stmt          ->  CompoundStmt
+17) Stmt          ->  Declaration
+18) Stmt          ->  ;
+
+19) ForStmt       ->  for ( Expr ; OptExpr ; OptExpr ) Stmt
+
+20) OptExpr       ->  Expr
+21) OptExpr       ->  ε
+
+22) WhileStmt     ->  while ( Expr ) Stmt
+
+23) IfStmt        ->  if ( Expr ) Stmt ElsePart
+
+24) ElsePart      ->  else Stmt
+25) ElsePart      ->  ε
+
+26) CompoundStmt  ->  { StmtList }
+
+27) StmtList      ->  Stmt StmtList'
+28) StmtList      ->  ε
+
+29) StmtList'      ->  Stmt StmtList'
+30) StmtList'      ->  ε
+
+31) Expr          ->  identifier = Expr
+32) Expr          ->  Rvalue
+
+33) Rvalue        ->  Compare Mag Rvalue'
+34) Rvalue        ->  Mag
+
+35) Rvalue'        ->  Compare Mag Rvalue'
+36) Rvalue'        ->  ε
+
+37) Compare       ->  == 
+38) Compare       ->  <
+39) Compare       ->  >
+40) Compare       ->  <=
+41) Compare       ->  >=
+42) Compare       ->  !=
+
+43) Mag           ->  + Term Mag'
+44) Mag           ->  - Term Mag''
+45) Mag           ->  Term
+
+46) Mag'           ->  + Term Mag'
+47) Mag'           ->  ε
+
+48) Mag''          ->  - Term Mag''
+49) Mag''          ->  ε
+
+50) Term          ->  * Factor Term'
+51) Term          ->  / Factor Term''
+52) Term          ->  Factor
+
+53) Term'          ->  * Factor Term'
+54) Term'          ->  ε
+
+55) Term''          ->  / Factor Term''
+56) Term''          ->  ε
+
+57) Factor        ->  ( Expr )
+58) Factor        ->  - Factor
+59) Factor        ->  + Factor
+60) Factor        ->  identifier
+61) Factor        ->  number
