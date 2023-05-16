@@ -15,6 +15,9 @@ if __name__ == '__main__':
     initial_state = q1
     final_states = [q1]
 
+    for state in states:
+        print(state.formed_by)
+
     a = Automata(states,alphabet,initial_state,final_states)
 
     a.insert_transition(q1, 'ε',q3)
@@ -26,9 +29,9 @@ if __name__ == '__main__':
     a.insert_transition(q3, 'a',q1)
     #a.insert_transition(q3, 'ε',q1)
 
-    print(a.initial_state)
+    #print(a.initial_state)
 
-    #print(convert_to_dfa(a).transition)
+    print(convert_to_dfa(a).transition)
     """
     states = ['A', 'B', 'C', 'D', 'E', 'F']
     final = ['C', 'D', 'E']

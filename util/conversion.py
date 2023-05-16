@@ -1,4 +1,6 @@
 from Classes.Automata import Automata
+from Classes.State import State
+from Classes.util import find_equally_formed
 
 def generate_new_states(states):
 
@@ -8,14 +10,12 @@ def generate_new_states(states):
         for start in range(len(states)):
             for end in range(start+width, len(states)):
 
-                new_state = [states[start]]
+                new_state_composition = [states[start]]
 
                 for i in range(width):
-                    new_state.append(states[end-i])
+                    new_state_composition.append(states[end-i])
 
-                new_state.sort()
-
-                new_states.append(';'.join(new_state))
+                new_states.append(State.combine('Gen', new_state_composition))
 
     return new_states
 
@@ -39,7 +39,7 @@ def compute_dfa_final_states(nfa_final_states, dfa_states):
 
     for dfa_state in dfa_states:
 
-        dfa_state_composition = dfa_state.split(';')
+        dfa_state_composition = dfa_state.formed_by
 
         for state in dfa_state_composition:
 
@@ -52,9 +52,12 @@ def compute_dfa_final_states(nfa_final_states, dfa_states):
 
 def convert_to_dfa(automata: Automata):
     
-    dfa_states = automata.states + generate_new_states(automata.states) + ['d']
+    d =  State('d')
+    dfa_states = automata.states + generate_new_states(automata.states) + [d]
 
-    dfa_initial_state = ';'.join(sorted(find_E(automata, automata.initial_state)))
+    dfa_initial_state_composition = find_E(automata, str(automata.initial_state))
+
+    dfa_initial_state = find_equally_formed(dfa_initial_state_composition, dfa_states)
 
     dfa_final_states = (compute_dfa_final_states(automata.final_states, dfa_states))
 
@@ -65,10 +68,10 @@ def convert_to_dfa(automata: Automata):
 
     for dfa_state in dfa_states:
 
-        if dfa_state == 'd':
+        if dfa_state == d:
             continue
 
-        dfa_state_composition = dfa_state.split(';')
+        dfa_state_composition = dfa_state.formed_by
 
         for symbol in dfa_alphabet:
             
@@ -78,16 +81,15 @@ def convert_to_dfa(automata: Automata):
 
                 for state in automata.transition[composition_state][symbol]:
 
-                    abc = find_E(automata, state)
-                    dest = dest.union(abc)
+                    dest = dest.union(find_E(automata, state))
 
-            dest_state = 'd'
+            dest_state = d
             if len(dest) != 0:
-                dest_state = ';'.join(sorted(dest))
+                dest_state = find_equally_formed(dest, dfa_states)
             
             dfa_automata.insert_transition(dfa_state, symbol, dest_state)
     
     for symbol in dfa_alphabet:
-        dfa_automata.insert_transition('d', symbol, 'd')
+        dfa_automata.insert_transition(d, symbol, d)
 
     return dfa_automata

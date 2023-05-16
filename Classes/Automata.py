@@ -44,7 +44,7 @@ class Automata:
             for symbol in self.alphabet:
                 self.transition[state_string][symbol] = []
 
-    def set_initial_state(self, initial_state: str):
+    def set_initial_state(self, initial_state: State):
         
         if initial_state in self.states:
             self.initial_state = initial_state
