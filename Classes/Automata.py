@@ -13,6 +13,8 @@ That means:
     The automata is deterministic if the size of each subset is at maximum 1 and ε is not in the alphabet.
 """
 
+from State import State
+
 class Automata:
 
     def __init__(self, states: list, alphabet: list, initial_state: str, final_states=[], token='') -> None:
@@ -50,7 +52,7 @@ class Automata:
 
             try:
                 if destination_state not in self.states:
-                    raise Exception
+                    raise Exception(f'Destination state {destination_state} not found')
                 if destination_state not in self.transition[initial_state][symbol]:
                     self.transition[initial_state][symbol].append(destination_state)
                 else:
