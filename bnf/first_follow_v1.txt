@@ -1,0 +1,107 @@
+1) Function
+   - First: int - float
+   - Follow: $
+
+2) ArgList
+   - First: , - int - float
+   - Follow: )
+
+3) ArgList'
+   - First: ε - ,
+   - *Follow: )
+
+4) Arg
+   - First: int - float
+   - Follow: )
+
+5) Declaration
+   - First: int - float
+   - Follow: else - for - while - if - { - int - float - ; - == - < - > - <= - >= - != - + - - * - / - ( - identifier - number
+
+6) Type
+   - First: int - float
+   - Follow: identifier
+
+7) IdentList
+   - First: identifier
+   - Follow: ;
+
+#8) Stmt
+   - First: for - while - if - { - int - float - ; - == - < - > - <= - >= - != - + - - * - / - ( - identifier - number
+   - Follow: else - for - while - if - { - int - float - ; - == - < - > - <= - >= - != - + - - * - / - ( - identifier - number
+
+9) ForStmt
+   - First: for
+   - Follow: else - for - while - if - { - int - float - ; - == - < - > - <= - >= - != - + - - * - / - ( - identifier - number
+
+10) OptExpr
+    - First: ε - == - < - > - <= - >= - != - + - - * - / - ( - identifier - number
+    - Follow: ; - )
+
+11) WhileStmt
+    - First: while
+    - Follow: else - for - while - if - { - int - float - ; - == - < - > - <= - >= - != - + - - * - / - ( - identifier - number
+
+12) IfStmt
+    - First: if
+    - Follow: else - for - while - if - { - int - float - ; - == - < - > - <= - >= - != - + - - * - / - ( - identifier - number
+
+13) ElsePart
+    - First: ε - else
+    - Follow: <else - for - while - if - { - int - float - ; - == - < - > - <= - >= - != - + - - * - / - ( - identifier - number
+
+14) CompoundStmt
+    - First: {
+    - Follow: $ - else - for - while - if - { - int - float - ; - == - < - > - <= - >= - != - + - - * - / - ( - identifier - number
+
+15) StmtList
+    - First: ε - for - while - if - { - int - float - ; - == - < - > - <= - >= - != - + - - * - / - ( - identifier - number
+    - Follow: }
+
+16) StmtList'
+    - First: ε - for - while - if - { - int - float - ; - == - < - > - <= - >= - != - + - - * - / - ( - identifier - number
+    - Follow: }
+
+17) Expr
+    - First: == - < - > - <= - >= - != - + - - * - / - ( - identifier - number
+    - Follow: ) - ;
+
+18) Rvalue
+    - First: == - < - > - <= - >= - != - + - - * - / - ( - identifier - number
+    - Follow: ) - ;
+
+19) Rvalue'
+    - First: ε - == - < - > - <= - >= - !=
+    - Follow: ) - ;
+
+20) Compare
+    - First: == - < - > - <= - >= - != 
+    - Follow: + - - * - / - ( - identifier - number
+
+21) Mag
+    - First: + - - * - / - ( - identifier - number
+    - Follow: ) - ;
+
+22) Mag'
+    - First: +, ε
+    - Follow: ) - ;
+
+23) Mag''
+    - First: -, ε
+    - Follow: ) - ;
+
+24) Term
+    - First: * - / - number - identifier - ( - + - - 
+    - Follow: + - - * - / - ( - identifier - number
+
+25) Term'
+    - First: *, ε
+    - Follow: + - - * - / - ( - identifier - number
+
+26) Term''
+    - First: /, ε
+    - Follow: + - - * - / - ( - identifier - number
+
+27) Factor
+    - First: number - identifier - ( - + - -
+    - Follow: + - - * - / - ( - identifier - number
