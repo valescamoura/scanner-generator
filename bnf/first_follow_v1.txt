@@ -8,7 +8,7 @@
 
 3) ArgList'
    - First: ε - ,
-   - *Follow: )
+   - Follow: )
 
 4) Arg
    - First: int - float
@@ -48,7 +48,7 @@
 
 13) ElsePart
     - First: ε - else
-    - Follow: <else - for - while - if - { - int - float - ; - == - < - > - <= - >= - != - + - - * - / - ( - identifier - number
+    - Follow: else - for - while - if - { - int - float - ; - == - < - > - <= - >= - != - + - - * - / - ( - identifier - number
 
 14) CompoundStmt
     - First: {
