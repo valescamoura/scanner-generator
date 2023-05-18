@@ -19,8 +19,20 @@ Os entregáveis são:
     - [ ] Implementar algoritmo que leia o autômato e imprima os tokens. (Valesca)
 - [ ] Parser top-down
     - [x] Transformar a BNF para LL: https://github.com/TangoEnSkai/mini-c-compiler-c/blob/master/mini_c.gr. (Valesca)
-    - [ ] Calcular First e Follow e montar a tabela. (Valesca)
+    - [x] Calcular First e Follow e montar a tabela. (Valesca)
     - [ ] Implementar o parser de acordo com o algoritmo dado. (Valesca)
 
+### Config 
+
+- Necessário instalar GraphViz para geração da árvore como imagem PNG: https://graphviz.org/download/
 
 Estrutura de dados: A definir
+
+Dicas:
+- para cada tipo de token -> lista de separadores possiveis
+- listar limitacoes no relatorio de entrega
+- linha que o token está na saída do scanner
+- ε -> desempilha
+- funcao auxiliar pra controle do backtracking
+- todas as regras aparecem na tabela
+- output é uma arvore

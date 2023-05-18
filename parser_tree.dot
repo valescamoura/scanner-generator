@@ -1,0 +1,37 @@
+digraph tree {
+    "Function";
+    "Type";
+    "int";
+    "identifier";
+    "hello";
+    "(";
+    "ArgList";
+    "Arg";
+    "Type_2147469533456";
+    "int_2147469533552";
+    "identifier_2147469533504";
+    "h";
+    ")";
+    "CompoundStmt";
+    "{";
+    "StmtList";
+    "ε";
+    "}";
+    "Function" -> "Type";
+    "Function" -> "identifier";
+    "Function" -> "(";
+    "Function" -> "ArgList";
+    "Function" -> ")";
+    "Function" -> "CompoundStmt";
+    "Type" -> "int";
+    "identifier" -> "hello";
+    "ArgList" -> "Arg";
+    "Arg" -> "Type_2147469533456";
+    "Arg" -> "identifier_2147469533504";
+    "Type_2147469533456" -> "int_2147469533552";
+    "identifier_2147469533504" -> "h";
+    "CompoundStmt" -> "{";
+    "CompoundStmt" -> "StmtList";
+    "CompoundStmt" -> "}";
+    "StmtList" -> "ε";
+}

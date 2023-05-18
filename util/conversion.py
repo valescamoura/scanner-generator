@@ -1,6 +1,6 @@
-from Classes.Automata import Automata
 from Classes.State import State
 from Classes.util import find_equally_formed
+from classes.automata import Automata
 
 def generate_new_states(states):
 
