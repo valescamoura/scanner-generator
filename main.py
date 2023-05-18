@@ -1,4 +1,4 @@
-from Classes.Automata import Automata
+from classes.automata import Automata
 from util.conversion import convert_to_dfa
 from util.minimization import * 
 

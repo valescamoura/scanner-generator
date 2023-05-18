@@ -1,4 +1,4 @@
-from Classes.Automata import Automata
+from classes.automata import Automata
 
 def create_nerode_table(states: list):
 
