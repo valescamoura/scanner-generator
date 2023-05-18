@@ -22,6 +22,9 @@ Os entregáveis são:
     - [x] Calcular First e Follow e montar a tabela. (Valesca)
     - [ ] Implementar o parser de acordo com o algoritmo dado. (Valesca)
 
+### Config 
+
+- Necessário instalar GraphViz para geração da árvore como imagem PNG: https://graphviz.org/download/
 
 Estrutura de dados: A definir
 
@@ -30,3 +33,6 @@ Dicas:
 - listar limitacoes no relatorio de entrega
 - linha que o token está na saída do scanner
 - ε -> desempilha
+- funcao auxiliar pra controle do backtracking
+- todas as regras aparecem na tabela
+- output é uma arvore
