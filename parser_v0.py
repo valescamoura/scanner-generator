@@ -8,6 +8,7 @@ import subprocess
 from classes.obj import Token, TokenError, Heap, Rule
 from bnf.lookahed import LOOKAHEAD
 
+
 RULES = {}
 
 
@@ -30,8 +31,8 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]], rule
                 heap.pop()
                 errors.append(TokenError(tokens[index], 'desempilha'))
             elif lookahead_ == 'avanca':
-                index += 1
                 errors.append(TokenError(tokens[index], 'avanca'))
+                index += 1
             else:
                 ids_rules = lookahead_
                 # for id_rule in ids_rules:
@@ -59,14 +60,18 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]], rule
                 heap.pop() # Desempilha simbolo
                 index += 1 # Avanca na lista de tokens
             else:
-                raise Exception('Error')
+                errors.append(TokenError(tokens[index], 'avanca'))
+                index += 1
             
-    if heap.len() == 0 and len(tokens) == index:
-        print(' Aceito!')
+    if heap.len() == 0 and len(tokens) == index and len(errors) == 0:
+        print(' Accepted')
     else:
-        raise Exception('Error')
+        print(' Not accepted')
+        if len(tokens) > index:
+            errors.append(TokenError(None, 'avanca'))
+        elif heap.len() > 0: 
+            errors.append(TokenError(None, 'desempilha'))
     
-    # print(parser_tree)
     return parser_tree, errors
 
 
@@ -93,23 +98,30 @@ def get_tokens() -> List[Token]:
     token2 = Token('(', '(', 1)
     token3 = Token('int', 'int', 1)
     token4 = Token('h', 'identifier', 1)
+    tokenerr = Token('(', '(', 1)
     token5 = Token(')', ')', 1)
     token6 = Token('{', '{', 1)
     token7 = Token('}', '}', 1)
     token8 = Token('$', '$', 1)
-    return [token, token1, token2, token3, token4, token5, token6, token7, token8]
+    return [token, token1, token2, token3, token4, tokenerr, token5, token6, token7, token8]
+    # return [token, token1, token2, token3, token4, token5, token6, token7, token8]
 
 
 def print_derivation_tree(root):
-    print('The tree leaves are represented in red color...')
+    print(' The tree leaves are represented in red color...')
     for pre, _, node in RenderTree(root):
         if not node.children and node.name[0].isupper():
             Node('ε', parent=node)
             
     def _get_leaf_color(node):
-        if not node.children:
-            return "\033[31m"
-        return ''
+        color_scheme = ["\033[33m", "\033[32m", "\033[35m", "\033[36m"] # amarelo, verde, azul e ciano
+        if not node.children: # folha
+            return "\033[31m" # vermelho
+        elif node.is_root:
+            return "\033[34m" # roxo
+        
+        color = color_scheme[node.depth % len(color_scheme)]
+        return color
     
     for pre, _, node in RenderTree(root):
         print(f"{pre}{_get_leaf_color(node)}{node.name}\033[0m")
@@ -147,20 +159,26 @@ def gen_view_for_parser_tree_temp(nodes):
 
 
 if __name__ == '__main__':
-    print('Reading rules...')
+    print('=> Reading rules...')
     rules = read_rules('./bnf/bnf_minic.txt')
 
     lookahed = LOOKAHEAD
 
-    print('Reading tokens...')
+    print('=> Reading tokens...')
     tokens = get_tokens()
 
-    print('Start parsing...')
+    print('=> Start parsing...')
     parser_tree, errors = parser(tokens, lookahed, rules)
     
-    print('Print derivation tree...')
-    print_derivation_tree(parser_tree[0])
-    
-    print('Generate view for parser tree...')
-    gen_view_for_parser_tree(parser_tree[0])
-    print(f'See the parser_tree.png file.')
+    if len(errors) == 0:
+        print('=> Print derivation tree...')
+        print_derivation_tree(parser_tree[0])
+        
+        print('=> Generate view for parser tree...')
+        gen_view_for_parser_tree(parser_tree[0])
+        print(f'See the parser_tree.png file.')
+    else:
+        print('=> Errors...')
+        for err in errors:
+            err.print_error()
+ 
