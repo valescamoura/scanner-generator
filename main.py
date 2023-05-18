@@ -1,5 +1,5 @@
 from classes.automata import Automata
-from Classes.State import State
+from classes.state import State
 from util.conversion import convert_to_dfa
 from util.minimization import * 
 
@@ -14,9 +14,6 @@ if __name__ == '__main__':
     alphabet = ['a', 'b', 'ε']
     initial_state = q1
     final_states = [q1]
-
-    for state in states:
-        print(state.formed_by)
 
     a = Automata(states,alphabet,initial_state,final_states)
 

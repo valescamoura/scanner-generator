@@ -1,11 +1,11 @@
+from typing import Set, Dict
+from classes.state import State
 
-def find_equally_formed(state_composition, state_list):
+def find_equally_formed(single_state_composition: Set[State], multiple_state_compositions: Dict[State, Set[State]]):
 
-    result = None
-    for state_elem in state_list:
+    for state in multiple_state_compositions.keys():
 
-        if state_elem.formed_by == state_composition:
-            result = state_elem
-            break
+        if multiple_state_compositions[state] == single_state_composition:
+            return state
     
-    return result
+    return None

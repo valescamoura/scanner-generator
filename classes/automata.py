@@ -13,11 +13,12 @@ That means:
     The automata is deterministic if the size of each subset is at maximum 1 and ε is not in the alphabet.
 """
 
-from Classes.State import State
+from classes.state import State
+from typing import List
 
 class Automata:
 
-    def __init__(self, states: list, alphabet: list, initial_state: State, final_states=[], token='') -> None:
+    def __init__(self, states: List[State], alphabet: List[str], initial_state: State, final_states=[], token='') -> None:
         
         self.states = states
         self.alphabet = alphabet
@@ -37,12 +38,10 @@ class Automata:
 
         for state in self.states:
 
-            state_string = str(state)
-
-            self.transition[state_string] = dict()
+            self.transition[state] = dict()
 
             for symbol in self.alphabet:
-                self.transition[state_string][symbol] = []
+                self.transition[state][symbol] = []
 
     def set_initial_state(self, initial_state: State):
         
@@ -54,12 +53,10 @@ class Automata:
     def insert_transition(self, initial_state: State, symbol : str, destination_state: State):
 
             try:
-                init_state_str = str(initial_state)
-                dest_state_str = str(destination_state)
                 if destination_state not in self.states:
                     raise Exception(f'Destination state {destination_state} not found')
-                if destination_state not in self.transition[init_state_str][symbol]:
-                    self.transition[init_state_str][symbol].append(dest_state_str)
+                if destination_state not in self.transition[initial_state][symbol]:
+                    self.transition[initial_state][symbol].append(destination_state)
                 else:
                     print(f'Transition ({initial_state},{symbol}) -> {destination_state} already in transition table')
             except:
@@ -76,14 +73,12 @@ class Automata:
 
     #insert a new state and update the transition table
     def insert_state(self, state: State):
-        
-        state_str = str(state)
 
         if state not in self.states:
             self.states.append(state)
-            self.transition[state_str] = dict()
+            self.transition[state] = dict()
             for symbol in self.alphabet:
-                self.transition[state_str][symbol] = []
+                self.transition[state][symbol] = []
         else:
             print(f'State {state} already exists')
     

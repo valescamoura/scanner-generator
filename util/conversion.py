@@ -1,29 +1,34 @@
-from Classes.State import State
-from Classes.util import find_equally_formed
+from typing import List, Dict, Tuple, Set
+from classes.state import State
+from classes.util import find_equally_formed
 from classes.automata import Automata
 
-def generate_new_states(states):
+def generate_new_states(states: List[State]) -> Tuple[List[State], Dict[str, set]]:
 
-    new_states = []
+    new_state_list = states[:]
+    state_composition = dict()
+
+    for state in states:
+        state_composition[state] = set([state])
 
     for width in range(1, len(states)):
         for start in range(len(states)):
             for end in range(start+width, len(states)):
-
-                new_state_composition = [states[start]]
+                
+                new_state = State('Gen')
+                new_state_list.append(new_state)
+                state_composition[new_state] = set([states[start]])
 
                 for i in range(width):
-                    new_state_composition.append(states[end-i])
+                    state_composition[new_state].add(states[end-i])
 
-                new_states.append(State.combine('Gen', new_state_composition))
+    return new_state_list, state_composition
 
-    return new_states
-
-def find_E(automata: Automata, state: str):
+def find_E(automata: Automata, state: State):
 
     return find_E_aux(automata, state, set())
     
-def find_E_aux(automata: Automata, state: str, reached_states):
+def find_E_aux(automata: Automata, state: State, reached_states):
 
     reached_states.add(state)
     for reached in automata.transition[state]['ε']:
@@ -33,15 +38,13 @@ def find_E_aux(automata: Automata, state: str, reached_states):
     return reached_states
 
 
-def compute_dfa_final_states(nfa_final_states, dfa_states):
+def compute_dfa_final_states(nfa_final_states: List[State], dfa_states_composition: Dict[State, Set[State]]):
 
     dfa_final_states = []
 
-    for dfa_state in dfa_states:
+    for dfa_state in dfa_states_composition.keys():
 
-        dfa_state_composition = dfa_state.formed_by
-
-        for state in dfa_state_composition:
+        for state in dfa_states_composition[dfa_state]:
 
             if state in nfa_final_states:
                 dfa_final_states.append(dfa_state)
@@ -53,13 +56,16 @@ def compute_dfa_final_states(nfa_final_states, dfa_states):
 def convert_to_dfa(automata: Automata):
     
     d =  State('d')
-    dfa_states = automata.states + generate_new_states(automata.states) + [d]
+    #generate every possible combination of states for the new automata
+    dfa_states, dfa_states_composition = generate_new_states(automata.states)
 
-    dfa_initial_state_composition = find_E(automata, str(automata.initial_state))
+    dfa_states += [d]
 
-    dfa_initial_state = find_equally_formed(dfa_initial_state_composition, dfa_states)
+    dfa_initial_state_composition = find_E(automata, automata.initial_state)
 
-    dfa_final_states = (compute_dfa_final_states(automata.final_states, dfa_states))
+    dfa_initial_state = find_equally_formed(dfa_initial_state_composition, dfa_states_composition)
+
+    dfa_final_states = compute_dfa_final_states(automata.final_states, dfa_states_composition)
 
     dfa_alphabet = automata.alphabet[:]
     dfa_alphabet.remove('ε')
@@ -71,7 +77,7 @@ def convert_to_dfa(automata: Automata):
         if dfa_state == d:
             continue
 
-        dfa_state_composition = dfa_state.formed_by
+        dfa_state_composition = dfa_states_composition[dfa_state]
 
         for symbol in dfa_alphabet:
             
@@ -85,7 +91,7 @@ def convert_to_dfa(automata: Automata):
 
             dest_state = d
             if len(dest) != 0:
-                dest_state = find_equally_formed(dest, dfa_states)
+                dest_state = find_equally_formed(dest, dfa_states_composition)
             
             dfa_automata.insert_transition(dfa_state, symbol, dest_state)
     
