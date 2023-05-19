@@ -1,5 +1,6 @@
 import json
 import jsonpickle
+import pandas as pd
 from classes.obj import AutomataWrapper
 from util.reparser import recursive_solver
 from util.conversion import convert_to_dfa
@@ -26,6 +27,8 @@ def read_tokens_file(filename):
         wrapper = AutomataWrapper(token, automata, js[token]['prio'], js[token]['sep'])
 
         wrapper_list.append(wrapper)
+
+        print(f'States: {automata.states} - initial state: {automata.initial_state}\nTransition: {automata.transition}\nFinal States: {automata.final_states}\n\n')
 
     return wrapper_list
 

@@ -3,5 +3,110 @@
         "regexp": "([A-z]°(([A-z]|[0-9]))*)",
         "prio": "2",
         "sep": [" "]
+        },
+    "number": {
+        "regexp": "((([0-9])*°.)°([0-9])*)",
+        "prio": "2",
+        "sep": [" "]
+    },
+    "float": {
+        "regexp": "((((f°l)°o)°a)°t)",
+        "prio": "1",
+        "sep": []
+        },
+    "int": {
+        "regexp": "((i°n)°t)",
+        "prio": "1",
+        "sep": []
+        },
+    "if": {
+        "regexp": "(i°f)",
+        "prio": "1",
+        "sep": []
+        },
+    "else": {
+        "regexp": "(((e°l)°s)°e)",
+        "prio": "1",
+        "sep": []
+        },
+    "for": {
+        "regexp": "((f°o)°r)",
+        "prio": "1",
+        "sep": []
+        },  
+    "while": {
+        "regexp": "((((w°h)°i)°l)°e)",
+        "prio": "1",
+        "sep": []
+        },  
+    "==": {
+        "regexp": "(=°=)",
+        "prio": "1",
+        "sep": []
+        },
+    "<": {
+        "regexp": "<",
+        "prio": "1",
+        "sep": []
+        },
+    ">": {
+        "regexp": ">",
+        "prio": "1",
+        "sep": []
+        },
+    "<=": {
+        "regexp": "(<°=)",
+        "prio": "1",
+        "sep": []
+        },
+    ">=": {
+        "regexp": "(>°=)",
+        "prio": "1",
+        "sep": []
+        },
+    "!=": {
+        "regexp": "(!°=)",
+        "prio": "1",
+        "sep": []
+        },
+    ",": {
+        "regexp": ",",
+        "prio": "1",
+        "sep": []
+        },
+    ";": {
+        "regexp": ";",
+        "prio": "1",
+        "sep": []
+        },
+    "(": {
+        "regexp": "\\(",
+        "prio": "1",
+        "sep": []
+        },
+    ")": {
+        "regexp": "\\)",
+        "prio": "1",
+        "sep": []
+        },
+    "+": {
+        "regexp": "+",
+        "prio": "1",
+        "sep": []
+        },
+    "-": {
+        "regexp": "-",
+        "prio": "1",
+        "sep": []
+        },
+    "/": {
+        "regexp": "/",
+        "prio": "1",
+        "sep": []
+        },
+    "*": {
+        "regexp": "\\*",
+        "prio": "1",
+        "sep": []
         }
 }
