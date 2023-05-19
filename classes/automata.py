@@ -61,7 +61,17 @@ class Automata:
                     print(f'Transition ({initial_state},{symbol}) -> {destination_state} already in transition table')
             except:
                 raise Exception(f'transition ({initial_state},{symbol}) -> {destination_state} doesnt match the transition table. Ensure that the states and the symbol are inserted in the automata')
-        
+    
+    def remove_state(self, state):
+
+        del self.transition[state]
+        self.states.remove(state)
+        if state in self.final_states:
+            self.final_states.remove(state)
+
+    def update_transition(self, initial_state: State, symbol:str, destination_state:State):
+
+        self.transition[initial_state][symbol] = [destination_state]
 
     #Turn a state into a final state
     def set_final_state(self, state: State):
