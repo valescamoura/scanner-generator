@@ -1,7 +1,8 @@
 from classes.automata import Automata
 from classes.state import State
 from util.conversion import convert_to_dfa
-from util.minimization import * 
+from util.minimization import minimize_afd
+from util.reparser import recursive_solver
 
 
 if __name__ == '__main__':
@@ -26,9 +27,9 @@ if __name__ == '__main__':
     a1.insert_transition(q3, 'a',q1)
     #a1.insert_transition(q3, 'ε',q1)
 
-    #print(a.initial_state)
+    #print(a1.initial_state)
 
-    print(convert_to_dfa(a1).transition)
+    #print(convert_to_dfa(a1).transition)
     
     a = State('A')
     b = State('B')
@@ -55,10 +56,20 @@ if __name__ == '__main__':
     a2.insert_transition(f, '0', f)
     a2.insert_transition(f, '1', f)
 
-    res = minimize_afd(a2)
+    #res = minimize_afd(a2)
 
-    res2 = minimize_afd(convert_to_dfa(a1))
+    #res2 = minimize_afd(convert_to_dfa(a1))
 
-    print(res.states, res.transition)
+    #print(res.states, res.transition)
 
-    print(res2.states, res2.transition)
+    #print(res2.states, res2.transition)
+
+    res = recursive_solver('(a°((a|0))*)')
+
+    res2 = convert_to_dfa(res)
+
+    #res2 = minimize_afd(res1)
+
+    print(res2.initial_state)
+    print(res2.transition)
+    print(res2.states)

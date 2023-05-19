@@ -10,7 +10,7 @@ def generate_new_states(states: List[State]) -> Tuple[List[State], Dict[str, set
 
     for state in states:
         state_composition[state] = set([state])
-
+    """
     for width in range(1, len(states)):
         for start in range(len(states)):
             for end in range(start+width, len(states)):
@@ -21,6 +21,7 @@ def generate_new_states(states: List[State]) -> Tuple[List[State], Dict[str, set
 
                 for i in range(width):
                     state_composition[new_state].add(states[end-i])
+    """
 
     return new_state_list, state_composition
 
@@ -65,6 +66,12 @@ def convert_to_dfa(automata: Automata):
 
     dfa_initial_state = find_equally_formed(dfa_initial_state_composition, dfa_states_composition)
 
+    if dfa_initial_state == None:
+        new_state = State('Gen')
+        dfa_states += [new_state]
+        dfa_states_composition[new_state] = dfa_initial_state_composition
+        dfa_initial_state = new_state
+
     dfa_final_states = compute_dfa_final_states(automata.final_states, dfa_states_composition)
 
     dfa_alphabet = automata.alphabet[:]
@@ -92,6 +99,11 @@ def convert_to_dfa(automata: Automata):
             dest_state = d
             if len(dest) != 0:
                 dest_state = find_equally_formed(dest, dfa_states_composition)
+                if dest_state == None:
+                    new_state = State('Gen')
+                    dfa_automata.insert_state(new_state)
+                    dfa_states_composition[new_state] = dest
+                    dest_state = new_state
             
             dfa_automata.insert_transition(dfa_state, symbol, dest_state)
     
