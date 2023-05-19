@@ -213,8 +213,9 @@ def gen_view_for_parser_tree(root):
             node.name = f'{node.name}_{id(node)}'
         node_names.add(node.name)
         
-    path = os.path.join(os.getcwd(), 'parser_tree.dot')
-    path_png = os.path.join(os.getcwd(), 'parser_tree.png')
+    root_ = os.path.join(os.getcwd(), 'data')
+    path = os.path.join(root_, 'parser_tree.dot')
+    path_png = os.path.join(root_, 'parser_tree.png')
     DotExporter(root).to_dotfile(path) # Exportar a árvore para um arquivo DOT
     subprocess.call(['dot', '-Kneato','-Tpng', path, '-o', path_png]) # Usa a instalação do GraphViz
 

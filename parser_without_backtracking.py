@@ -27,16 +27,16 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]], rule
             if lookahead_ == None:
                 index += 1
                 errors.append(TokenError(tokens[index], 'avanca')) # tokens a mais
-            elif lookahead_ == 'desempilha':
+            elif lookahead_[0] == 'desempilha':
                 heap.pop()
                 errors.append(TokenError(tokens[index], 'desempilha'))
-            elif lookahead_ == 'avanca':
+            elif lookahead_[0] == 'avanca':
                 errors.append(TokenError(tokens[index], 'avanca'))
                 index += 1
             else:
                 ids_rules = lookahead_
                 # for id_rule in ids_rules:
-                id_rule = ids_rules[0]
+                id_rule = ids_rules[0] # tratamento com backtracking
                 rule: List[str] = [r for r in rules[id_rule].rule if r != 'Îµ'] # Îµ == ε
         
                 heap.pop()
@@ -45,8 +45,6 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]], rule
                 new_nodes = [Node(r, parent=parser_tree[current_root_id]) for r in rule]
                 current_root_id += 1
                 parser_tree[current_root_id:current_root_id] = new_nodes
-
-                # break # tratar. ver se regra aceita, backtracking etc
 
         else: # current_symbol[0].islower() -> Simbolo é um terminal
             if current_symbol == tokens[index].type_:
@@ -93,6 +91,7 @@ def read_rules(filename: str) -> Dict[str, Rule]:
 
 
 def get_tokens() -> List[Token]:
+    # int hello (int h) {}
     token = Token('int', 'int', 1)
     token1 = Token('hello', 'identifier', 1)
     token2 = Token('(', '(', 1)
@@ -101,11 +100,10 @@ def get_tokens() -> List[Token]:
     tokenerr = Token('(', '(', 1)
     token5 = Token(')', ')', 1)
     token6 = Token('{', '{', 1)
-    tokenerr = Token('(', '(', 1)
     token7 = Token('}', '}', 1)
     token8 = Token('$', '$', 1)
-    return [token, token1, token2, token3, token4, tokenerr, token5, token6, token7, tokenerr, token8]
-    # return [token, token1, token2, token3, token4, token5, token6, token7, token8]
+    # return [token, token1, token2, token3, token4, tokenerr, token5, token6, token7, tokenerr, token8]
+    return [token, token1, token2, token3, token4, token5, token6, token7, token8]
 
 
 def print_derivation_tree(root):
@@ -135,27 +133,10 @@ def gen_view_for_parser_tree(root):
             node.name = f'{node.name}_{id(node)}'
         node_names.add(node.name)
         
-    path = os.path.join(os.getcwd(), 'parser_tree.dot')
-    path_png = os.path.join(os.getcwd(), 'parser_tree.png')
+    root_ = os.path.join(os.getcwd(), 'data')
+    path = os.path.join(root_, 'parser_tree.dot')
+    path_png = os.path.join(root_, 'parser_tree.png')
     DotExporter(root).to_dotfile(path) # Exportar a árvore para um arquivo DOT
-    subprocess.call(['dot', '-Kneato','-Tpng', path, '-o', path_png]) # Usa a instalação do GraphViz
-
-
-def gen_view_for_parser_tree_temp(nodes):
-    tree = Tree()
-
-    count = 0
-    for node in nodes:
-        if node.parent is None:
-            tree.create_node(node.name, count)
-        else:
-            id_ = f'{node.name.lower()}{node.height}'
-            tree.create_node(node.name, id_, parent=f'{node.name.lower()}{node.height-1}')
-        count += 1
-
-    path = os.path.join(os.getcwd(), 'parser_tree.dot')
-    path_png = os.path.join(os.getcwd(), 'parser_tree.png')
-    DotExporter(tree).to_dotfile(path) # Exportar a árvore para um arquivo DOT
     subprocess.call(['dot', '-Kneato','-Tpng', path, '-o', path_png]) # Usa a instalação do GraphViz
 
 
