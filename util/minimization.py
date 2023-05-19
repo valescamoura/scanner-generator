@@ -178,6 +178,8 @@ def minimize_afd(automata: Automata):
 
     automata = combine_equivalent_states(new_states, automata)
 
+    print(automata.states, automata.transition)
+
     remove_not_reachable(automata)
 
     return automata

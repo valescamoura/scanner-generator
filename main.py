@@ -57,4 +57,8 @@ if __name__ == '__main__':
 
     res = minimize_afd(a2)
 
+    res2 = minimize_afd(convert_to_dfa(a1))
+
     print(res.states, res.transition)
+
+    print(res2.states, res2.transition)
