@@ -1,5 +1,7 @@
 from dataclasses import dataclass
-from typing import List, Optional, Literal
+from classes.automata import Automata
+from typing import List, Optional
+from typing_extensions import Literal
 
 @dataclass
 class Token:
@@ -27,6 +29,12 @@ class TokenError:
             print('tratar')
         print()
 
+@dataclass
+class AutomataWrapper:
+    token: str
+    automata: Automata
+    prio: int
+    sep: List[str]
 
 @dataclass
 class Rule:
