@@ -126,6 +126,9 @@ def combine_equivalent_states(new_states: Dict[State, Set[State]], automata: Aut
 
         for state2 in new_states[state1]:
 
+            if state2 in automata.final_states:
+                automata.set_final_state(state1)
+
             equivalency_table[state2] = state1
     
     for state in equivalency_table.keys():

@@ -72,7 +72,7 @@ def convert_to_dfa(automata: Automata):
         dfa_states_composition[new_state] = dfa_initial_state_composition
         dfa_initial_state = new_state
 
-    dfa_final_states = compute_dfa_final_states(automata.final_states, dfa_states_composition)
+    dfa_final_states = []
 
     dfa_alphabet = automata.alphabet[:]
     dfa_alphabet.remove('ε')
@@ -109,5 +109,9 @@ def convert_to_dfa(automata: Automata):
     
     for symbol in dfa_alphabet:
         dfa_automata.insert_transition(d, symbol, d)
+    
+    final = compute_dfa_final_states(automata.final_states, dfa_states_composition)
+    for state in final:
+        dfa_automata.set_final_state(state)
 
     return dfa_automata

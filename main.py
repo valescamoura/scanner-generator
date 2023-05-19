@@ -64,12 +64,13 @@ if __name__ == '__main__':
 
     #print(res2.states, res2.transition)
 
-    res = recursive_solver('(a°((a|0))*)')
+    res = recursive_solver('([A-z]°(([A-z]|[0-9]))*)')
 
-    res2 = convert_to_dfa(res)
+    res1 = convert_to_dfa(res)
 
-    #res2 = minimize_afd(res1)
+    res2 = minimize_afd(res1)
 
     print(res2.initial_state)
     print(res2.transition)
     print(res2.states)
+    print(res2.final_states)
