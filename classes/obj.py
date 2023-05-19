@@ -22,9 +22,9 @@ class TokenError:
             elif self.errorType == 'avanca':
                 # print(f'===== O token {self.token.value} não era esperado. É provável que este token esteja sobrando ou no lugar errado do código.')
                 print(f'===== The token "{self.token.value}" was not expected. It is likely that this token is left over or in the wrong place in the code.')
-
         else: 
-            print('tratar')
+            # print('Não foi possível dar match entre todos os tokens informados e a pilha de regras.')
+            print('It was not possible to match all the given tokens to the rule stack.')
         print()
 
 
@@ -37,6 +37,7 @@ class Rule:
 @dataclass
 class Heap():
     heap: List[str]
+    heap_aux: List[str]
 
     def __init__(self, elems: List[str]):
         self.heap = []
@@ -55,3 +56,9 @@ class Heap():
 
     def len(self) -> int:
         return len(self.heap)
+    
+    def backup(self) -> None:
+        self.heap_aux = self.heap[:]
+
+    def restore(self) -> None:
+        self.heap = self.heap_aux[:]

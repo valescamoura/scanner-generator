@@ -101,9 +101,10 @@ def get_tokens() -> List[Token]:
     tokenerr = Token('(', '(', 1)
     token5 = Token(')', ')', 1)
     token6 = Token('{', '{', 1)
+    tokenerr = Token('(', '(', 1)
     token7 = Token('}', '}', 1)
     token8 = Token('$', '$', 1)
-    return [token, token1, token2, token3, token4, tokenerr, token5, token6, token7, token8]
+    return [token, token1, token2, token3, token4, tokenerr, token5, token6, token7, tokenerr, token8]
     # return [token, token1, token2, token3, token4, token5, token6, token7, token8]
 
 
