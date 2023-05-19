@@ -1,31 +1,33 @@
 from classes.automata import Automata
 from classes.automata import State
 
-er = "[A-z]°([A-z]|[0-9]°[A-Z])*"
-"([A-z])°([A-z]|[0-9])*"
 """
-a ° b = (a°b)
+ab = (a°b)
 a* = (a)*
 a | b = (a|b)
-([A-z]°(([A-z]|[0-9]))*)
-([A-z]°(([A-z]|[0-9]))*)
 """
 
 
 def recursive_solver(regex: str) -> Automata:
     
     par_count = 0
+    escape = False
     for ind, char in enumerate(regex):
-        if char == '(':
-            par_count += 1
-        elif char == ')':
-            par_count -= 1
-        elif char == '°' and par_count == 1:
-            return concat(regex[1:ind], regex[ind+1:-1])
-        elif char == '|' and par_count == 1:
-            return union(regex[1:ind], regex[ind+1:-1])
-        elif char == '*' and par_count == 0:
-            return star(regex[1:ind-1])
+        if not escape:
+            if char == '(':
+                par_count += 1
+            elif char == ')':
+                par_count -= 1
+            elif char == '°' and par_count == 1:
+                return concat(regex[1:ind], regex[ind+1:-1])
+            elif char == '|' and par_count == 1:
+                return union(regex[1:ind], regex[ind+1:-1])
+            elif char == '*' and par_count == 0:
+                return star(regex[1:ind-1])
+            elif char == '\\':
+                escape=True
+
+    regex = regex.replace('\\', '')
 
     return create_automata(regex)
 

@@ -32,9 +32,12 @@ def find_E(automata: Automata, state: State):
 def find_E_aux(automata: Automata, state: State, reached_states):
 
     reached_states.add(state)
-    for reached in automata.transition[state]['ε']:
-        if reached not in reached_states:
-            reached_states = reached_states.union(find_E_aux(automata, reached, reached_states))
+    try:
+        for reached in automata.transition[state]['ε']:
+            if reached not in reached_states:
+                reached_states = reached_states.union(find_E_aux(automata, reached, reached_states))
+    except KeyError:
+        return reached_states
     
     return reached_states
 
@@ -75,7 +78,8 @@ def convert_to_dfa(automata: Automata):
     dfa_final_states = []
 
     dfa_alphabet = automata.alphabet[:]
-    dfa_alphabet.remove('ε')
+    if 'ε' in dfa_alphabet:
+        dfa_alphabet.remove('ε')
 
     dfa_automata = Automata(dfa_states, dfa_alphabet, dfa_initial_state, dfa_final_states)
 
