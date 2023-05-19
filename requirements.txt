@@ -1,3 +1,4 @@
 pandas==1.4.4
 anytree==2.8.0
 graphviz==0.20.1
+treelib==1.6.4
