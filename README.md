@@ -28,7 +28,7 @@ Os entregáveis são:
     - [x] Geração da árvore de derivação.
         - [x] Impressão no terminal.
         - [x] Gerar imagem com esquema da árvore como output.
-    - [ ] Backtracking 
+    - [ ] Backtracking.
 
 ## Configuração do ambiente
 
@@ -84,4 +84,10 @@ A versão sem backtracking é a versão que estamos utilizando pois ela gera a �
 
 A versão com backtracking está imcompleta pois não conseguimos gerar a árvore com as relações de pai e filho entre cada par de nós corretamente.
 
-####
+#### Como executar
+
+```
+python .\parser_without_backtracking.py
+```
+
+*Para modificar os exemplos de input, basta comentar e descomentar os exemplos disponíveis no método get_token() no mesmo arquivo.*
