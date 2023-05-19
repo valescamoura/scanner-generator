@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 from classes.automata import Automata
-from typing import List, Optional
-from typing_extensions import Literal
+from typing import List, Optional, Literal
 
 @dataclass
 class Token:
