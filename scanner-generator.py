@@ -28,7 +28,13 @@ def read_tokens_file(filename):
 
         wrapper_list.append(wrapper)
 
-        print(f'States: {automata.states} - initial state: {automata.initial_state}\nTransition: {automata.transition}\nFinal States: {automata.final_states}\n\n')
+        print(f'States: {automata.states} - initial state: {automata.initial_state}\nFinal States: {automata.final_states}\n')
+
+        pf = pd.DataFrame(data=automata.transition)
+
+        print(pf.T)
+
+        print('\n')
 
     return wrapper_list
 
@@ -52,6 +58,3 @@ def read_automata_from_file(filename):
 
 wrapper_list = read_tokens_file('tokens.txt')
 write_automata_to_file('minic_automata.dat', wrapper_list)
-
-abc = read_automata_from_file('minic_automata.dat')
-print(abc)
