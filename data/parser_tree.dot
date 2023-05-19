@@ -7,9 +7,9 @@ digraph tree {
     "(";
     "ArgList";
     "Arg";
-    "Type_2147469533456";
-    "int_2147469533552";
-    "identifier_2147469533504";
+    "Type_1835526382320";
+    "int_1835526382416";
+    "identifier_1835526382368";
     "h";
     ")";
     "CompoundStmt";
@@ -26,10 +26,10 @@ digraph tree {
     "Type" -> "int";
     "identifier" -> "hello";
     "ArgList" -> "Arg";
-    "Arg" -> "Type_2147469533456";
-    "Arg" -> "identifier_2147469533504";
-    "Type_2147469533456" -> "int_2147469533552";
-    "identifier_2147469533504" -> "h";
+    "Arg" -> "Type_1835526382320";
+    "Arg" -> "identifier_1835526382368";
+    "Type_1835526382320" -> "int_1835526382416";
+    "identifier_1835526382368" -> "h";
     "CompoundStmt" -> "{";
     "CompoundStmt" -> "StmtList";
     "CompoundStmt" -> "}";
