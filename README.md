@@ -43,17 +43,38 @@ Os entregáveis são:
 
 ### Gerador de scanner
 
+### Execução
+
+Os exemplos gerados podem ser visualizados através da execução do scanner-generator.py
+
+python3 scanner-generator.py
+
 #### Formato do input
 
-a ° b = (a°b)
+O input é fornecido no formato JSON, com a seguinte caracterização (Exemplo):
+
+{
+"identifier" <- Nome do token: {
+        "regexp": "([A-z]°(([A-z]|[0-9]))*)", <- Expressão regular que define o token
+        "prio": "2", <- Prioridade do token em realação aos outros que possam aceitar a mesma cadeia
+        "sep": [" "] <- Separadores necessários para o token
+        },
+}
+
+Para simplificação da implementação do parser, foi adotado o seguinte formato para expressões regulares:
+
+ab = (a°b)
 a* = (a)*
 a | b = (a|b)
 
 #### Output
-Imagem do AFN?
+
+Os estados de cada AFD e a tabela de transição
 
 #### Limitações conhecidas
-Falta do scanner para interpretar a AFN e ?
+
+No momento está faltando a implementação do scanner em si que irá fazer o scan dos tokens utilizando os autômatos gerados e um arquivo de entrada.
+Não temos uma forma de visualizar graficamente os autômatos gerados.
 
 ### Parser
 
