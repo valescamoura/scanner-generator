@@ -1,0 +1,37 @@
+digraph {
+	Function [label=Function]
+	Function -> Type1
+	Function -> identifier1
+	Function -> "(1"
+	Function -> ArgList1
+	Function -> ")1"
+	Function -> CompoundStmt1
+	Type1 [label=Type]
+	Type1 -> int2
+	int2 [label=int]
+	identifier1 [label=identifier]
+	identifier1 -> hello1
+	hello1 [label=hello]
+	"(1" [label="("]
+	ArgList1 [label=ArgList]
+	ArgList1 -> Arg2
+	Arg2 [label=Arg]
+	Arg2 -> Type3
+	Arg2 -> identifier3
+	Type3 [label=Type]
+	Type3 -> int4
+	int4 [label=int]
+	identifier3 [label=identifier]
+	identifier3 -> h3
+	h3 [label=h]
+	")1" [label=")"]
+	CompoundStmt1 [label=CompoundStmt]
+	CompoundStmt1 -> "{2"
+	CompoundStmt1 -> StmtList2
+	CompoundStmt1 -> "}2"
+	"{2" [label="{"]
+	StmtList2 [label=StmtList]
+	StmtList2 -> epsilon1
+	epsilon1 [label="ε"]
+	"}2" [label="}"]
+}

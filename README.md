@@ -28,7 +28,7 @@ Os entregáveis são:
     - [x] Geração da árvore de derivação.
         - [x] Impressão no terminal.
         - [x] Gerar imagem com esquema da árvore como output.
-    - [ ] Backtracking.
+    - [x] Backtracking.
 
 ## Configuração do ambiente
 
