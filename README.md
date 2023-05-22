@@ -53,23 +53,29 @@ python3 scanner-generator.py
 
 O input é fornecido no formato JSON, com a seguinte caracterização (Exemplo):
 
-{
-"identifier" <- Nome do token: {
-        "regexp": "([A-z]°(([A-z]|[0-9]))*)", <- Expressão regular que define o token
-        "prio": "2", <- Prioridade do token em realação aos outros que possam aceitar a mesma cadeia
-        "sep": [" "] <- Separadores necessários para o token
-        },
+```
+{ 
+    "identifier": { # identifier representa o nome do token
+        "regexp": "([A-z]°(([A-z]|[0-9]))*)", # expressão regular que define o token
+        "prio": "2", # Prioridade do token em relação aos outros que possam aceitar a mesma cadeia
+        "sep": [" "] # Separadores necessários para o token
+    }
 }
+```
 
 Para simplificação da implementação do parser, foi adotado o seguinte formato para expressões regulares:
 
-ab = (a°b)
-a* = (a)*
-a | b = (a|b)
+- **CONCATENAÇÃO -> ab** : (a°b)
+
+- **ESTRELA -> a\***: (a)*
+
+- **OU -> a | b**: (a|b)
+
+*Como demonstrado acima, nunca usar espaços em branco na expressão e sempre utilizar os parêntesis, como especificado.*
 
 #### Output
 
-Os estados de cada AFD e a tabela de transição
+Os estados de cada AFD e a tabela de transição.
 
 #### Limitações conhecidas
 
@@ -89,26 +95,20 @@ class Token:
     line: int # linha onde o Token se encontra no arquivo de entrada.
 ```
 
-Essa lista idealmente deve ser gerada pelo scanner. Na implementação atual, ainda falta o scanner, geramos algumas entradas de exemplo, no formato esperado como input através da função get_tokens() no código fonte do parser.
+Essa lista é gerada pelo scanner.
 
 #### Output 
 
 O parser percorre toda a lista de tokens e em caso de não-aceitação, a saída é uma série de erros que indicam o caractere e a linha onde o erro surgiu. Ele indica a ocorrência de um token inesperado ou se após algum token era esperado outro token que não apareceu, de acordo com a natureza do erro.
 
-Em caso de aceitação, ele exibe a árvore sintática do programa recebido como input através da lista de tokens. Isso é feito através da impressão da árvore via terminal, com cada um dos níveis da árvore coloridos de forma distinta. As folhas da árvore são sempre coloridas de vermelho. Além disso, ele gera uma visualização gráfica em formato de árvore/grafo PNG e DOT no diretório ```parser_output```.
+Em caso de aceitação, ele exibe a árvore sintática do programa recebido como input através da lista de tokens. Isso é feito através da impressão da árvore via terminal. Além disso, ele gera uma visualização gráfica em formato de árvore PNG e DOT no diretório ```/data/parser_tree.png```.
 
 #### Limitações conhecidas
 
-Atualmente,existem duas versões do parser implementadas. A versão sem backtracking, e a versão com backtracking;
-
-A versão sem backtracking é a versão que estamos utilizando pois ela gera a árvore corretamente. No entanto, ela tem problemas para executar quando para uma determinada variável temos mais de uma opção de regra possível, pois ela só olha a primeira regra.
-
-A versão com backtracking está imcompleta pois não conseguimos gerar a árvore com as relações de pai e filho entre cada par de nós corretamente.
+?
 
 #### Como executar
 
 ```
 python .\parser_without_backtracking.py
 ```
-
-*Para modificar os exemplos de input, basta comentar e descomentar os exemplos disponíveis no método get_token() no mesmo arquivo.*
