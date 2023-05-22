@@ -36,7 +36,3 @@ def write_automata_to_file(filename, wrappper_list):
         serialized_list = jsonpickle.encode(wrappper_list)
 
         file.write(serialized_list)
-
-
-wrapper_list = read_tokens_file('examples/tokens.txt')
-write_automata_to_file('examples/minic_automata.dat', wrapper_list)
