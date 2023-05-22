@@ -13,7 +13,7 @@ for var in variaveis:
 
 for terminal in terminais:
     for i in range(len(variaveis)):
-        lookahead[variaveis[i]][terminal] = [item for item in df[terminal][i].split(',') if item != '']
+        lookahead[variaveis[i]][terminal] = [item.strip() for item in df[terminal][i].split(',') if item != '']
 
 # print(json.dumps(lookahead, indent=4))
 with open('lookahed.py', 'w') as file:
