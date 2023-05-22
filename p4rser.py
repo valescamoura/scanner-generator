@@ -102,9 +102,9 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]],
     backtrack('Function', None, 0)
 
     if heap.len() <= 1 and len(tokens) == index+1 and len(errors) == 0:
-        print(' Accepted')
+        print('=====> Accepted')
     else:
-        print(' Not accepted')
+        print('=====> Not accepted')
         if len(tokens) > index:
             errors.append(TokenError(None, 'avanca'))
         elif heap.len() > 0: 
@@ -170,14 +170,11 @@ def gen_view_for_derivation_tree(tree: Tree):
     print(f'=====> See the data/parser_tree.png file.')
 
 
-if __name__ == '__main__':
+def exec_parser(tokens: List[Token]) -> None:
     print('=> Reading rules...')
     rules = read_rules('./bnf/bnf_minic.txt')
 
     lookahed = LOOKAHEAD
-
-    print('=> Reading tokens...')
-    tokens = get_tokens()
 
     print('=> Start parsing...')
     parser_tree, errors = parser(tokens, lookahed, rules)
@@ -192,4 +189,9 @@ if __name__ == '__main__':
         print('=> Errors...')
         for err in errors:
             err.print_error()
+
+if __name__ == '__main__':
+   print('=> Reading tokens...')
+   tokens = get_tokens()
+   exec_parser(tokens)
  
