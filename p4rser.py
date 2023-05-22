@@ -66,7 +66,7 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]],
                         if s in LOOKAHEAD.keys(): # s é uma variável
                             success = backtrack(s, node_id, tree.depth(tree.get_node(node_id)))
                         else: # s é terminal ou s é epsilon
-                            if s == 'Îµ': # Îµ == ε:
+                            if s == 'Îµ' or s == 'ε': # Îµ == ε:
                                 heap.pop() # desempilha símbolo
                                 tree.create_node('ε', f'epsilon{parent_node_depth}', parent=node_id)
                             else:

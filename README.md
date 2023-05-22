@@ -36,6 +36,8 @@ Os entregáveis são:
 
 - Necessário instalar GraphViz para geração dos arquivos PNG: https://graphviz.org/download/.
     - Versão utilizada: ```graphviz version 8.0.5 (20230430.1635)```
+    - Linux: ```sudo apt install graphviz```.
+
 
 - Instalar os requirements: ```pip install -r requirements.txt```
 
