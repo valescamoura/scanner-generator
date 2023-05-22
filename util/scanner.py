@@ -67,10 +67,6 @@ def scan_file(program_file, automata_file):
                 char = file.read(1)
             else:
                 read_next = True
-
-            if char == '\n':
-                line_counter += 1
-                continue
             
             for automata in automata_list:
                 
@@ -107,17 +103,19 @@ def scan_file(program_file, automata_file):
                     if len(origin_automata.sep) > 0:
                         if last_sep in origin_automata.sep:
                             token_list.append(Token(word, current_token_type, line_counter))
-                            read_next = False
+                            if char != '\n':
+                                read_next = False
                             last_sep = ''
                         else:
                             error_list.append(f"Could not find the needed separator between {last_word} and {word} at line {line_counter}. {last_word}{word} is not a valid token")
                     else:
                         token_list.append(Token(word, current_token_type, line_counter))
-                        read_next = False
+                        if char != '\n':
+                            read_next = False
                         last_sep = ''
                 else:
                     #separadores podem ter apenas tamanho 1
-                    if char not in separators:
+                    if char not in (separators | {'\n'}):
                         error_list.append(f'Unrecognizable token {char} at line {line_counter}')
                     else:
                         last_sep = char
@@ -128,6 +126,10 @@ def scan_file(program_file, automata_file):
                 buffer.append(char)
             
             if char == '':
+                token_list.append(Token('$', '$', line_counter))
                 break
+
+            if char == '\n':
+                line_counter += 1
     
     return token_list, error_list

@@ -15,10 +15,9 @@ if __name__ == '__main__':
     write_automata_to_file(automata_output_file, wrapper_list)
 
     tokens, errors = scan_file(minic_program, automata_output_file)
-    tokens.append(Token('$', '$', 1))
     for token in tokens:
 
-        print(f'Token: {token.value}, Type: {token.type_}')
+        print(f'Token: {token.value}, Type: {token.type_}, line: {token.line}')
     
     if len(errors) > 0:
         print('Found lexical errors in the program. exiting...\n\nErrors:')
