@@ -26,6 +26,8 @@ def recursive_solver(regex: str) -> Automata:
                 return star(regex[1:ind-1])
             elif char == '\\':
                 escape=True
+        else:
+            escape = False
 
     regex = regex.replace('\\', '')
 

@@ -18,11 +18,10 @@ from typing import List
 
 class Automata:
 
-    def __init__(self, states: List[State], alphabet: List[str], initial_state: State, final_states=[], token='') -> None:
+    def __init__(self, states: List[State], alphabet: List[str], initial_state: State, final_states=[]) -> None:
         
         self.states = states
         self.alphabet = alphabet
-        self.token = token
         self.final_states = []
 
         for state in final_states:
