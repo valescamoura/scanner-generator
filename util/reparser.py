@@ -1,13 +1,9 @@
 from classes.automata import Automata
 from classes.automata import State
 
-"""
-ab = (a°b)
-a* = (a)*
-a | b = (a|b)
-"""
 
-
+#This function recursively parses the regex using parenthesis counting
+#It does that by identifying the main operator and dividing the Regex
 def recursive_solver(regex: str) -> Automata:
     
     par_count = 0
@@ -30,14 +26,18 @@ def recursive_solver(regex: str) -> Automata:
             escape = False
 
     regex = regex.replace('\\', '')
-
+    #caso base
+    #se não existe um operador válido, a expressão já é um terminal então cria e retorna o autômato equivamente
     return create_automata(regex)
 
+#This function creates the base automata that can recognize one (or a set of) symbols without repetition
 def create_automata(terminal: str) -> Automata:
     
-    upper_case = range(65,91)
+    #ASCII table code range for each of the abreviation terminals ([0-9], [A-z], etc)
+    upper_case = range(65,91) 
     lower_case = range(97,123)
     num = range(48,58)
+    
     alphabet = []
     q0 = State('q0')
     q1 = State('q1')

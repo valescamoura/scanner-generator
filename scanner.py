@@ -53,8 +53,6 @@ def scan_file(program_file, automata_file):
 
     automata_list, min_prio, separators = read_automata_from_file(automata_file)
 
-
-
     with open(program_file, 'r') as file:
 
         still_active = len(automata_list)
@@ -133,3 +131,11 @@ def scan_file(program_file, automata_file):
                 break
     
     return token_list, error_list
+
+tokens, errors = scan_file('examples/minic-prog.mc', 'examples/minic_automata.dat')
+
+for token in tokens:
+    print(f'token: {token.value} , Type: {token.type_}')
+
+for error in errors:
+    print(error)

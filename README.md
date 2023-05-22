@@ -17,7 +17,7 @@ Os entregáveis são:
     - [x] Transformar expressões regulares em um AFN. (Daniel)
     - [x] Transformar cada AFN em um AFD. (Daniel)
     - [x] Minimização de cada AFD. (Daniel)
-    - [ ] Implementar algoritmo que leia o autômato e imprima os tokens. (Daniel)
+    - [x] Implementar algoritmo que leia o autômato e imprima os tokens. (Daniel)
 - Parser top-down (Integrante: Valesca)
     - [x] Transformar a BNF para LL e simplificar regras onde for possível: https://github.com/TangoEnSkai/mini-c-compiler-c/blob/master/mini_c.gr.
     - [x] Calcular First e Follow.
@@ -61,11 +61,21 @@ O input é fornecido no formato JSON, com a seguinte caracterização (Exemplo):
         },
 }
 
+Na montagem das expressões regulares, pode-se utilizar os as seguintes abreviações:
+
+- [A-z] : Todas as letras de a até z maiúsculas e minúsculas
+- [A-Z] : Mesmo do anterior porém apenas maiúsculas
+- [a-z] : Apenas minúsculas
+- [0-9] : Números inteiros entre 0 e 9
+
 Para simplificação da implementação do parser, foi adotado o seguinte formato para expressões regulares:
 
 ab = (a°b)
 a* = (a)*
-a | b = (a|b)
+a + b = (a|b)
+
+Onde a e b são caracteres ASCII quaisquer ou alguma das abreviações citadas anteriormente.
+Caso seja necessário utilizar algum caractere definidor da expressão regular (Ex. (, ), "*") como símbolo terminal é preciso adicionar um escape "\\" antes do caractere. \\) , por exemplo.
 
 #### Output
 
@@ -73,8 +83,7 @@ Os estados de cada AFD e a tabela de transição
 
 #### Limitações conhecidas
 
-No momento está faltando a implementação do scanner em si que irá fazer o scan dos tokens utilizando os autômatos gerados e um arquivo de entrada.
-Não temos uma forma de visualizar graficamente os autômatos gerados.
+As funções utilizadas para a geração dos autômatos do scanner não possuem tratamento de erro da entrada do usuário (expressões regulares por exemplo).
 
 ### Parser
 

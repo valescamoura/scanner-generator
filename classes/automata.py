@@ -2,7 +2,7 @@
 This class is used to hold the data structure that represents an Automata.
 The transition table is stored in the Automata.transition variable as a dictionary and has the following organization:
 transition = {
-    state_name: {
+    state: {
         symbol1: list()
         symbol2: list()
     } 
@@ -58,7 +58,7 @@ class Automata:
                     self.transition[initial_state][symbol].append(destination_state)
                 else:
                     print(f'Transition ({initial_state},{symbol}) -> {destination_state} already in transition table')
-            except:
+            except KeyError:
                 raise Exception(f'transition ({initial_state},{symbol}) -> {destination_state} doesnt match the transition table. Ensure that the states and the symbol are inserted in the automata')
     
     def remove_state(self, state):

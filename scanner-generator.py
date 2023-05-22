@@ -1,6 +1,5 @@
 import json
 import jsonpickle
-import pandas as pd
 from classes.obj import AutomataWrapper
 from util.reparser import recursive_solver
 from util.conversion import convert_to_dfa
@@ -28,14 +27,6 @@ def read_tokens_file(filename):
 
         wrapper_list.append(wrapper)
 
-        print(f'States: {automata.states} - initial state: {automata.initial_state}\nFinal States: {automata.final_states}\n')
-
-        pf = pd.DataFrame(data=automata.transition)
-
-        print(pf.T)
-
-        print('\n')
-
     return wrapper_list
 
 def write_automata_to_file(filename, wrappper_list):
@@ -47,5 +38,5 @@ def write_automata_to_file(filename, wrappper_list):
         file.write(serialized_list)
 
 
-wrapper_list = read_tokens_file('tokens.txt')
-write_automata_to_file('minic_automata.dat', wrapper_list)
+wrapper_list = read_tokens_file('examples/tokens.txt')
+write_automata_to_file('examples/minic_automata.dat', wrapper_list)

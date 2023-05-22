@@ -3,28 +3,7 @@ from classes.state import State
 from classes.util import find_equally_formed
 from classes.automata import Automata
 
-def generate_new_states(states: List[State]) -> Tuple[List[State], Dict[str, set]]:
-
-    new_state_list = states[:]
-    state_composition = dict()
-
-    for state in states:
-        state_composition[state] = set([state])
-    """
-    for width in range(1, len(states)):
-        for start in range(len(states)):
-            for end in range(start+width, len(states)):
-                
-                new_state = State('Gen')
-                new_state_list.append(new_state)
-                state_composition[new_state] = set([states[start]])
-
-                for i in range(width):
-                    state_composition[new_state].add(states[end-i])
-    """
-
-    return new_state_list, state_composition
-
+#This function returns all states reachable from a given state using 0 or more ε transitions
 def find_E(automata: Automata, state: State):
 
     return find_E_aux(automata, state, set())
@@ -41,7 +20,8 @@ def find_E_aux(automata: Automata, state: State, reached_states):
     
     return reached_states
 
-
+#Returns the set of final states based on each state composition 
+#If a state A on the new automata has a final state from the old automata in its composition, then A is final as well
 def compute_dfa_final_states(nfa_final_states: List[State], dfa_states_composition: Dict[State, Set[State]]):
 
     dfa_final_states = []
@@ -59,21 +39,25 @@ def compute_dfa_final_states(nfa_final_states: List[State], dfa_states_compositi
 
 def convert_to_dfa(automata: Automata):
     
+    #Thrash state, indicates that the computation has reached a dead end
     d =  State('d')
-    #generate every possible combination of states for the new automata
-    dfa_states, dfa_states_composition = generate_new_states(automata.states)
+
+    dfa_states_composition = dict()
+
+    for state in automata.states:
+        dfa_states_composition[state] = set([state])
+
+    dfa_states = automata.states[:]
 
     dfa_states += [d]
 
     dfa_initial_state_composition = find_E(automata, automata.initial_state)
 
-    dfa_initial_state = find_equally_formed(dfa_initial_state_composition, dfa_states_composition)
-
-    if dfa_initial_state == None:
-        new_state = State('Gen')
-        dfa_states += [new_state]
-        dfa_states_composition[new_state] = dfa_initial_state_composition
-        dfa_initial_state = new_state
+    #creates the new initial state
+    new_state = State('Gen')
+    dfa_states += [new_state]
+    dfa_states_composition[new_state] = dfa_initial_state_composition
+    dfa_initial_state = new_state
 
     dfa_final_states = []
 
