@@ -45,12 +45,6 @@ Os entregáveis são:
 
 ### Gerador de scanner
 
-### Execução
-
-Os exemplos gerados podem ser visualizados através da execução do scanner-generator.py
-
-python3 scanner-generator.py
-
 #### Formato do input
 
 O input é fornecido no formato JSON, com a seguinte caracterização (Exemplo):
@@ -87,7 +81,7 @@ Caso seja necessário utilizar algum caractere definidor da expressão regular (
 
 #### Output
 
-Os estados de cada AFD e a tabela de transição.
+Lista com os tokens do programa passado como argumento.
 
 #### Limitações conhecidas
 
@@ -130,5 +124,5 @@ O arquivo main.py possui uma versão interativa da execução.
 Para executar uma versão mais direta, sendo necessário alterar o nome dos arquivos no código em si, utilize o arquivo main-direct.py
 
 ```
-python .\main.py ou
+python .\main.py
 ```

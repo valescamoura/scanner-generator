@@ -1,4 +1,7 @@
 int hello(int h){
-    int id ;
-    = 2 ;
+    int id;
+    int = 2;
+    if a > b{
+        a = 2;
+    }
 }
