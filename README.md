@@ -120,10 +120,15 @@ Em caso de aceitação, ele exibe a árvore sintática do programa recebido como
 
 #### Como executar
 
-```
 Existem alguns arquivos exemplo que já foram testados no programa dentro da pasta examples.
-O arquivo main.py possui uma versão interativa da execução.
-Para executar uma versão mais direta, sendo necessário alterar o nome dos arquivos no código em si, utilize o aruqivo main-direct.py
 
-python .\main.py
+ - minic-lex-err : Arquivo que possui erros que serão apontados pelo analisador léxico
+ - minic-lex-sucess : Arquivo que termina o parse sem erros
+ - minic-par-err : Arquivo que possui erros apontados pelo parser
+ 
+O arquivo main.py possui uma versão interativa da execução.
+Para executar uma versão mais direta, sendo necessário alterar o nome dos arquivos no código em si, utilize o arquivo main-direct.py
+
+```
+python .\main.py ou
 ```

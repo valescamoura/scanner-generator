@@ -31,7 +31,53 @@ digraph {
 	CompoundStmt1 -> "}2"
 	"{2" [label="{"]
 	StmtList2 [label=StmtList]
-	StmtList2 -> epsilon1
-	epsilon1 [label="ε"]
+	StmtList2 -> Stmt3
+	StmtList2 -> "StmtList'3"
+	Stmt3 [label=Stmt]
+	Stmt3 -> Declaration4
+	Declaration4 [label=Declaration]
+	Declaration4 -> Type5
+	Declaration4 -> IdentList5
+	Declaration4 -> ";5"
+	Type5 [label=Type]
+	Type5 -> int6
+	int6 [label=int]
+	IdentList5 [label=IdentList]
+	IdentList5 -> identifier6
+	identifier6 [label=identifier]
+	identifier6 -> id6
+	id6 [label=id]
+	";5" [label=";"]
+	"StmtList'3" [label="StmtList'"]
+	"StmtList'3" -> Stmt4
+	"StmtList'3" -> "StmtList'4"
+	Stmt4 [label=Stmt]
+	Stmt4 -> Expr5
+	Stmt4 -> ";6"
+	Expr5 [label=Expr]
+	Expr5 -> identifier7
+	Expr5 -> "=6"
+	Expr5 -> Expr6
+	identifier7 [label=identifier]
+	identifier7 -> id7
+	id7 [label=id]
+	"=6" [label="="]
+	Expr6 [label=Expr]
+	Expr6 -> Rvalue7
+	Rvalue7 [label=Rvalue]
+	Rvalue7 -> Mag8
+	Mag8 [label=Mag]
+	Mag8 -> Term9
+	Term9 [label=Term]
+	Term9 -> Factor10
+	Factor10 [label=Factor]
+	Factor10 -> number11
+	number11 [label=number]
+	number11 -> 211
+	211 [label=2]
+	";6" [label=";"]
+	"StmtList'4" [label="StmtList'"]
+	"StmtList'4" -> epsilon3
+	epsilon3 [label="ε"]
 	"}2" [label="}"]
 }

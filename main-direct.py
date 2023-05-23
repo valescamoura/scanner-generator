@@ -13,13 +13,13 @@ if __name__ == '__main__':
         tokens_file = 'examples/tokens.txt'
         
         #file where the generated automata will be stored
-        automata_output_file = 'minic-automata.dat'
+        automata_output_file = 'data/minic-automata.dat'
 
         if generate_automata:
             wrapper_list = read_tokens_file(tokens_file)
             write_automata_to_file(automata_output_file, wrapper_list)
 
-        program = 'examples/minic-lex-sucess.mc'
+        program = 'examples/minic-par-err.mc'
     
         tokens, errors = scan_file(program, automata_output_file)
         for token in tokens:
