@@ -12,7 +12,8 @@ heap: Heap
 errors: List[TokenError] = []
 tree: Tree
 index = 0  # Índice para percorrer a lista de tokens
-backtrack_count = 0 
+backup_index = 0
+backtrack_count = -1 
 def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]], 
                                 rules: List[Rule]) -> Tuple[Tree, List[TokenError]]:
     global heap
@@ -20,6 +21,7 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]],
     global index
     global backtrack_count
     global tree
+    global backup_index
 
     heap = Heap(['$', 'Function']) # Inicializa a pilha com o símbolo inicial
     tree = Tree()
@@ -30,6 +32,7 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]],
         global index
         global backtrack_count
         global tree
+        global backup_index
 
         current_symbol = symbol
         if current_symbol[0].isupper(): # Simbolo é uma variável
@@ -53,6 +56,7 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]],
                     rule: List[str] = [r for r in rules[rule_id].rule]
 
                     heap.backup()
+                    backup_index = index
                     node_id = current_symbol if parent_node_uri is None else f'{current_symbol}{parent_node_depth+1}'
                     if parent_node_uri is None:
                         tree.create_node(current_symbol, node_id)
@@ -65,19 +69,22 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]],
                         heap.push([s])
                         if s in LOOKAHEAD.keys(): # s é uma variável
                             success = backtrack(s, node_id, tree.depth(tree.get_node(node_id)))
+                            print(success)
                         else: # s é terminal ou s é epsilon
                             if s == 'Îµ' or s == 'ε': # Îµ == ε:
                                 heap.pop() # desempilha símbolo
                                 tree.create_node('ε', f'epsilon{parent_node_depth}', parent=node_id)
                             else:
                                 success = backtrack(s, node_id, tree.depth(tree.get_node(node_id))) # aplicar backtrack pra cair no caso base e dar match
-                        
+                                print(success)
+
                         if not success:
                             break
                     if not success:
                         heap.restore()
-                        index -= backtrack_count
-                        backtrack_count = 0
+                        index = backup_index
+                        #index -= backtrack_count
+                        backtrack_count = -1
                         tree.remove_node(node_id)
                         continue # ir para próx iteração do for/próxima regra
                     else:
@@ -93,10 +100,7 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]],
                 backtrack_count += 1
                 return True
             else:
-                errors.append(TokenError(tokens[index], 'avanca'))
-                index += 1
-                backtrack_count += 1
-                return True
+                return False
         return False
 
     backtrack('Function', None, 0)
