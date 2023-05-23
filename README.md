@@ -110,7 +110,17 @@ Em caso de aceitação, ele exibe a árvore sintática do programa recebido como
 
 #### Limitações conhecidas
 
-?
+O parser não é capaz de dar mensagens de erro detalhadas quando (pensando na tabela lookahead e regras definidas através da bnf) temos um símbolo terminal seguido de um símbolo terminal inesperado, ele só consegue detalhar o erro nos casos onde temos uma variável seguida de um token terminal inesperado.
+
+Exemplo da limitação:
+
+```
+int hello(int h){
+    int id;
+    id = 2;
+    if id < 9 # repare que if é um terminal e está seguido de id que é outro símbolo terminal, nesse caso a mensagem de erro não será detalhada
+}
+```
 
 #### Como executar
 

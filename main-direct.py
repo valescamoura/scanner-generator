@@ -19,7 +19,7 @@ if __name__ == '__main__':
             wrapper_list = read_tokens_file(tokens_file)
             write_automata_to_file(automata_output_file, wrapper_list)
 
-        program = 'examples/minic-par-err.mc'
+        program = 'examples/minic-par-success.mc'
     
         tokens, errors = scan_file(program, automata_output_file)
         for token in tokens:
