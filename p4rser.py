@@ -12,14 +12,14 @@ heap: Heap
 errors: List[TokenError] = []
 tree: Tree
 index = 0  # Índice para percorrer a lista de tokens
-backtrack_count = 0 
+backup_index = 0
 def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]], 
                                 rules: List[Rule]) -> Tuple[Tree, List[TokenError]]:
     global heap
     global errors
     global index
-    global backtrack_count
     global tree
+    global backup_index
 
     heap = Heap(['$', 'Function']) # Inicializa a pilha com o símbolo inicial
     tree = Tree()
@@ -28,8 +28,8 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]],
         global heap
         global errors
         global index
-        global backtrack_count
         global tree
+        global backup_index
 
         current_symbol = symbol
         if current_symbol[0].isupper(): # Simbolo é uma variável
@@ -45,7 +45,6 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]],
             elif lookahead_[0] == 'avanca':
                 errors.append(TokenError(tokens[index], 'avanca'))
                 index += 1
-                backtrack_count += 1
                 return True
             else:
                 rules_id = lookahead_
@@ -53,10 +52,17 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]],
                     rule: List[str] = [r for r in rules[rule_id].rule]
 
                     heap.backup()
+                    backup_index = index
                     node_id = current_symbol if parent_node_uri is None else f'{current_symbol}{parent_node_depth+1}'
                     if parent_node_uri is None:
                         tree.create_node(current_symbol, node_id)
                     else:
+                        node_id = f'{current_symbol}{parent_node_depth+1}'
+                        node = tree.get_node(node_id)
+                        while node != None:
+                            parent_node_depth += 1
+                            node_id = f'{current_symbol}{parent_node_depth+1}'
+                            node = tree.get_node(node_id)
                         tree.create_node(current_symbol, node_id, parent=parent_node_uri)
                     heap.pop()
 
@@ -71,13 +77,12 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]],
                                 tree.create_node('ε', f'epsilon{parent_node_depth}', parent=node_id)
                             else:
                                 success = backtrack(s, node_id, tree.depth(tree.get_node(node_id))) # aplicar backtrack pra cair no caso base e dar match
-                        
+                    
                         if not success:
                             break
                     if not success:
                         heap.restore()
-                        index -= backtrack_count
-                        backtrack_count = 0
+                        index = backup_index
                         tree.remove_node(node_id)
                         continue # ir para próx iteração do for/próxima regra
                     else:
@@ -85,18 +90,19 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]],
         else: # current_symbol[0].islower() -> Simbolo é um terminal
             if current_symbol == tokens[index].type_:
                 node_id = f'{current_symbol}{parent_node_depth+1}'
+                node = tree.get_node(node_id)
+                while node != None:
+                    parent_node_depth += 1
+                    node_id = f'{current_symbol}{parent_node_depth+1}'
+                    node = tree.get_node(node_id)
                 tree.create_node(current_symbol, node_id, parent=parent_node_uri)
                 if tokens[index].type_ != tokens[index].value:
                     tree.create_node(tokens[index].value, f'{tokens[index].value}{parent_node_depth+1}', parent=node_id)
                 heap.pop() # Desempilha simbolo
                 index += 1 # Avanca na lista de tokens
-                backtrack_count += 1
                 return True
             else:
-                errors.append(TokenError(tokens[index], 'avanca'))
-                index += 1
-                backtrack_count += 1
-                return True
+                return False
         return False
 
     backtrack('Function', None, 0)
