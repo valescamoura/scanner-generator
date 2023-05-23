@@ -1,5 +1,6 @@
 from classes.automata import Automata
 from classes.automata import State
+from classes.constants import EPSILON
 
 
 #This function recursively parses the regex using parenthesis counting
@@ -75,7 +76,7 @@ def concat(exp1: str, exp2: str) -> Automata:
     a1 = recursive_solver(exp1)
     a2 = recursive_solver(exp2)
 
-    new_alphabet = list(set(a1.alphabet).union(set(a2.alphabet + ['ε'])))
+    new_alphabet = list(set(a1.alphabet).union(set(a2.alphabet + [EPSILON])))
     new_states = list(set(a1.states).union(set(a2.states)))
     initial_state = a1.initial_state
     final_states = a2.final_states
@@ -86,7 +87,7 @@ def concat(exp1: str, exp2: str) -> Automata:
     copy_transition(a2, res)
 
     for state in a1.final_states:
-        res.insert_transition(state, 'ε', a2.initial_state)
+        res.insert_transition(state, EPSILON, a2.initial_state)
     
     return res
 
@@ -98,14 +99,14 @@ def star(exp: str):
     initial_state = new_state
     new_states = a1.states + [new_state]
     final_states = a1.final_states + [new_state]
-    new_alphabet = list(set(a1.alphabet).union(set(['ε'])))
+    new_alphabet = list(set(a1.alphabet).union(set([EPSILON])))
 
     res = Automata(new_states, new_alphabet, initial_state, final_states)
 
     copy_transition(a1, res)
 
     for state in final_states:
-        res.insert_transition(state, 'ε', a1.initial_state)
+        res.insert_transition(state, EPSILON, a1.initial_state)
 
     return res
 
@@ -116,7 +117,7 @@ def union(exp1: str, exp2:str):
     a2 = recursive_solver(exp2)
 
     new_state = State('q1')
-    new_alphabet = list(set(a1.alphabet).union(set(a2.alphabet + ['ε'])))
+    new_alphabet = list(set(a1.alphabet).union(set(a2.alphabet + [EPSILON])))
     final_states = list(set(a1.final_states).union(set(a2.final_states)))
     new_states = list(set(a1.states).union(set(a2.states))) + [new_state]
     initial_state = new_state
@@ -126,8 +127,8 @@ def union(exp1: str, exp2:str):
     copy_transition(a1, res)
     copy_transition(a2, res)
 
-    res.insert_transition(initial_state, 'ε', a1.initial_state)
-    res.insert_transition(initial_state, 'ε', a2.initial_state)
+    res.insert_transition(initial_state, EPSILON, a1.initial_state)
+    res.insert_transition(initial_state, EPSILON, a2.initial_state)
 
     return res
 

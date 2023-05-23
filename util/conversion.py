@@ -2,8 +2,9 @@ from typing import List, Dict, Tuple, Set
 from classes.state import State
 from classes.util import find_equally_formed
 from classes.automata import Automata
+from classes.constants import EPSILON
 
-#This function returns all states reachable from a given state using 0 or more ε transitions
+#This function returns all states reachable from a given state using 0 or more EPSILON transitions
 def find_E(automata: Automata, state: State):
 
     return find_E_aux(automata, state, set())
@@ -12,7 +13,7 @@ def find_E_aux(automata: Automata, state: State, reached_states):
 
     reached_states.add(state)
     try:
-        for reached in automata.transition[state]['ε']:
+        for reached in automata.transition[state][EPSILON]:
             if reached not in reached_states:
                 reached_states = reached_states.union(find_E_aux(automata, reached, reached_states))
     except KeyError:
@@ -62,8 +63,8 @@ def convert_to_dfa(automata: Automata):
     dfa_final_states = []
 
     dfa_alphabet = automata.alphabet[:]
-    if 'ε' in dfa_alphabet:
-        dfa_alphabet.remove('ε')
+    if EPSILON in dfa_alphabet:
+        dfa_alphabet.remove(EPSILON)
 
     dfa_automata = Automata(dfa_states, dfa_alphabet, dfa_initial_state, dfa_final_states)
 
@@ -101,5 +102,5 @@ def convert_to_dfa(automata: Automata):
     final = compute_dfa_final_states(automata.final_states, dfa_states_composition)
     for state in final:
         dfa_automata.set_final_state(state)
-
+        
     return dfa_automata

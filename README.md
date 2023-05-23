@@ -121,5 +121,9 @@ Em caso de aceitação, ele exibe a árvore sintática do programa recebido como
 #### Como executar
 
 ```
-python .\parser_without_backtracking.py
+Existem alguns arquivos exemplo que já foram testados no programa dentro da pasta examples.
+O arquivo main.py possui uma versão interativa da execução.
+Para executar uma versão mais direta, sendo necessário alterar o nome dos arquivos no código em si, utilize o aruqivo main-direct.py
+
+python .\main.py
 ```
