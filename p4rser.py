@@ -13,13 +13,11 @@ errors: List[TokenError] = []
 tree: Tree
 index = 0  # Índice para percorrer a lista de tokens
 backup_index = 0
-backtrack_count = -1 
 def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]], 
                                 rules: List[Rule]) -> Tuple[Tree, List[TokenError]]:
     global heap
     global errors
     global index
-    global backtrack_count
     global tree
     global backup_index
 
@@ -30,7 +28,6 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]],
         global heap
         global errors
         global index
-        global backtrack_count
         global tree
         global backup_index
 
@@ -48,7 +45,6 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]],
             elif lookahead_[0] == 'avanca':
                 errors.append(TokenError(tokens[index], 'avanca'))
                 index += 1
-                backtrack_count += 1
                 return True
             else:
                 rules_id = lookahead_
@@ -61,6 +57,12 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]],
                     if parent_node_uri is None:
                         tree.create_node(current_symbol, node_id)
                     else:
+                        node_id = f'{current_symbol}{parent_node_depth+1}'
+                        node = tree.get_node(node_id)
+                        while node != None:
+                            parent_node_depth += 1
+                            node_id = f'{current_symbol}{parent_node_depth+1}'
+                            node = tree.get_node(node_id)
                         tree.create_node(current_symbol, node_id, parent=parent_node_uri)
                     heap.pop()
 
@@ -69,22 +71,18 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]],
                         heap.push([s])
                         if s in LOOKAHEAD.keys(): # s é uma variável
                             success = backtrack(s, node_id, tree.depth(tree.get_node(node_id)))
-                            print(success)
                         else: # s é terminal ou s é epsilon
                             if s == 'Îµ' or s == 'ε': # Îµ == ε:
                                 heap.pop() # desempilha símbolo
                                 tree.create_node('ε', f'epsilon{parent_node_depth}', parent=node_id)
                             else:
                                 success = backtrack(s, node_id, tree.depth(tree.get_node(node_id))) # aplicar backtrack pra cair no caso base e dar match
-                                print(success)
-
+                    
                         if not success:
                             break
                     if not success:
                         heap.restore()
                         index = backup_index
-                        #index -= backtrack_count
-                        backtrack_count = -1
                         tree.remove_node(node_id)
                         continue # ir para próx iteração do for/próxima regra
                     else:
@@ -92,12 +90,16 @@ def parser(tokens: List[Token], lookahead: Dict[str, Dict[str, List[str]]],
         else: # current_symbol[0].islower() -> Simbolo é um terminal
             if current_symbol == tokens[index].type_:
                 node_id = f'{current_symbol}{parent_node_depth+1}'
+                node = tree.get_node(node_id)
+                while node != None:
+                    parent_node_depth += 1
+                    node_id = f'{current_symbol}{parent_node_depth+1}'
+                    node = tree.get_node(node_id)
                 tree.create_node(current_symbol, node_id, parent=parent_node_uri)
                 if tokens[index].type_ != tokens[index].value:
                     tree.create_node(tokens[index].value, f'{tokens[index].value}{parent_node_depth+1}', parent=node_id)
                 heap.pop() # Desempilha simbolo
                 index += 1 # Avanca na lista de tokens
-                backtrack_count += 1
                 return True
             else:
                 return False
